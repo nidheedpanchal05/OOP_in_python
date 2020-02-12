@@ -1,3 +1,6 @@
+#Simple program for ATM system
+
+#importing python modules
 import sys,time
 from random import *
 
@@ -6,15 +9,21 @@ from random import *
 a='-----'
 print(a,'Welcome to SMART Bank ATM',a)
 print(a+a,'Savings Account',a+a)
+
+#Main function
 def run():
 	print('\n Press "1" for Registeration\n Press "2" for Withdrawals\n Press "3" for Deposits \n Press "4" to Check Balance \n Press "5" to Cancel and Exit')
 	user_wish=int(input('\n '))
+	
+	#Check input
 	if user_wish>0 and user_wish<6:
 		print(' You pressed: ', user_wish)
 		print(' Proceeding',a)
 		time.sleep(2)
 		sys.stdout.write('\x1b[1A')
 		sys.stdout.write('\x1b[2K')
+		
+		#For registration
 		if user_wish==1:
 			global acHolder
 			acHolder=str(input(' Please enter name: '))
@@ -23,6 +32,8 @@ def run():
 			print(a,'New PIN :',init_pin,a)
 			global pin
 			pin=int(input(' Please enter generated pin to verify\n '))
+			
+			#PIN Verification
 			if init_pin==pin:
 				print(' PIN Verified\n',a+a,'New PIN generated Successfully ',a+a, '\n',a+a,'Please remmember this PIN ',a+a,'\n',a+a,'Do not share this with anyone',a+a)
 				global amount_init
@@ -31,6 +42,8 @@ def run():
 			else:
 				print(' Verification Failed')
 				run()
+				
+		#For Withdraws
 		if user_wish==2:
 			w_amount=int(input(" Enter Amount: "))
 			w_draw=input(' Please enter name: ')
@@ -38,6 +51,7 @@ def run():
 			if w_draw==acHolder and w_pin==pin:
 				print(' Verified PIN')
 				
+				#Balance should not be negative
 				if amount_init>w_amount:
 					amount_init-=w_amount
 					print(' Withdrawn Amount\n Current Balance: ',amount_init)
@@ -47,10 +61,13 @@ def run():
 			else:
 				print(' Verification Failed')
 				
+		#For depositing amount
 		if user_wish==3:
 			d_amount=int(input(" Enter Amount: "))
 			d_draw=input(' Please enter name: ')
 			d_pin=int(input(' Please enter PIN: '))
+			
+			#Verifing Account Holder
 			if d_draw==acHolder and d_pin==pin:
 				print(' Verified PIN')
 				amount_init+=d_amount
@@ -58,16 +75,25 @@ def run():
 				run()
 			else:
 				print(' Verification Failed')
+				
+		#For Checking Current Balance
 		if user_wish==4:
 			print('To check available bank balance follow the steps : ')
 			d_draw=input(' Please enter name: ')
 			d_pin=int(input(' Please enter PIN: '))
+			
+			#Verifing Account Holder
 			if d_draw==acHolder and d_pin==pin:
 				print(' Verified PIN')
 				print('Current available Balance: ',amount_init)
+				
+		#To cancel the transactions and exit...   
 		if user_wish==5:
 			print(a,'Thanks for visiting...',a)
 	else:
 			print(a,' Please Enter valid choices',a)
 			run()
+	
+#Calling the main function 
 run()
+
