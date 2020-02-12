@@ -1,0 +1,73 @@
+import sys,time
+from random import *
+
+
+
+a='-----'
+print(a,'Welcome to SMART Bank ATM',a)
+print(a+a,'Savings Account',a+a)
+def run():
+	print('\n Press "1" for Registeration\n Press "2" for Withdrawals\n Press "3" for Deposits \n Press "4" to Check Balance \n Press "5" to Cancel and Exit')
+	user_wish=int(input('\n '))
+	if user_wish>0 and user_wish<6:
+		print(' You pressed: ', user_wish)
+		print(' Proceeding',a)
+		time.sleep(2)
+		sys.stdout.write('\x1b[1A')
+		sys.stdout.write('\x1b[2K')
+		if user_wish==1:
+			global acHolder
+			acHolder=str(input(' Please enter name: '))
+			acNo=int(input(' Please enter A/C number: '))
+			init_pin=randint(1000,9999)
+			print(a,'New PIN :',init_pin,a)
+			global pin
+			pin=int(input(' Please enter generated pin to verify\n '))
+			if init_pin==pin:
+				print(' PIN Verified\n',a+a,'New PIN generated Successfully ',a+a, '\n',a+a,'Please remmember this PIN ',a+a,'\n',a+a,'Do not share this with anyone',a+a)
+				global amount_init
+				amount_init=0
+				run()
+			else:
+				print(' Verification Failed')
+				run()
+		if user_wish==2:
+			w_amount=int(input(" Enter Amount: "))
+			w_draw=input(' Please enter name: ')
+			w_pin=int(input(' Please enter PIN: '))
+			if w_draw==acHolder and w_pin==pin:
+				print(' Verified PIN')
+				
+				if amount_init>w_amount:
+					amount_init-=w_amount
+					print(' Withdrawn Amount\n Current Balance: ',amount_init)
+					run()
+				else:
+					print(a,' Unable to withdraw ',a)
+			else:
+				print(' Verification Failed')
+				
+		if user_wish==3:
+			d_amount=int(input(" Enter Amount: "))
+			d_draw=input(' Please enter name: ')
+			d_pin=int(input(' Please enter PIN: '))
+			if d_draw==acHolder and d_pin==pin:
+				print(' Verified PIN')
+				amount_init+=d_amount
+				print(' Deposited Amount\n Current Balance: ',amount_init)
+				run()
+			else:
+				print(' Verification Failed')
+		if user_wish==4:
+			print('To check available bank balance follow the steps : ')
+			d_draw=input(' Please enter name: ')
+			d_pin=int(input(' Please enter PIN: '))
+			if d_draw==acHolder and d_pin==pin:
+				print(' Verified PIN')
+				print('Current available Balance: ',amount_init)
+		if user_wish==5:
+			print(a,'Thanks for visiting...',a)
+	else:
+			print(a,' Please Enter valid choices',a)
+			run()
+run()
