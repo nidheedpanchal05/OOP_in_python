@@ -1,22 +1,31 @@
+#Program to calculate net salary of the employee 
+#By accepting their basic salary
+
+
 class Employee:
+
     def __init__(self):
-        self.c=input("Enter Company name: ")
-        self.comp_add=input("Enter company Address: ")
-        self.emp_id=int(input('Enter employee ID: '))
-        self.n=input('Enter name: ')
-        self.qual=input('Enter qualification: ')
-        self.ds=input('Enter designation: ')
-        self.sal=int(input('Enter basic salary: '))
-    def cal_sal(self):
-        TA=(18/100)*self.sal
-        DA=(70/100)*self.sal
-        HRA=(25/100)*self.sal
-        EPF=(10/100)*self.sal
-        net=self.sal+TA+DA+HRA-EPF
-        print("Net Salary is ",net)
+        self.comp_name = input("Enter Company name: ")
+        self.comp_address = input("Enter company Address: ")
+        self.emp_id = int(input("Enter employee ID: "))
+        self.emp_name = input("Enter name: ")
+        self.qualification = input("Enter qualification: ")
+        self.designation = input("Enter designation: ")
+        self.basic_sal = int(input("Enter basic salary: "))
+        
+    def calculate_net_sal(self):
+        TA = (18/100)*self.basic_sal
+        DA = (70/100)*self.basic_sal
+        HRA = (25/100)*self.basic_sal
+        EPF = (10/100)*self.basic_sal
+        net = self.sal+TA+DA+HRA-EPF
+        print("Net Salary is ", net)
+        
     def __del__(self):
         print("\nInstance destroyed")
 
-c=Employee()
-c.cal_sal()
-c.__del__()
+
+#Creating Instances
+object=Employee()
+object.calculate_net_sal()
+object.__del__()
