@@ -1,0 +1,33 @@
+#Program to connect to the database
+#Using python library mysql.connector
+
+import mysql.connector as mys
+
+#Connect to MySql server
+conn=mys.connect(user="root", password="scott", host="127.0.0.1")
+c=conn.cursor()
+
+#Query to change database
+c.execute("use python1")
+c.execute("select * from employee")
+
+#fetchall() function retrieves data from
+#the database in a tuples inside the list format
+row=c.fetchall()
+empid = row[1][0]
+print(empid)
+
+#Query to update the data
+c.execute("update employee set name='stu' where e_id ="+str(empid))
+
+e_id = input("Enter employee ID to delete! ")
+c.execute("delete from employee where e_id="+str(e_id))
+
+#Commiting all the changes
+conn.commit()
+#Displaying the records after upadation and deletion
+c.execute("select * from employee")
+print(c.fetchall())
+#Closing the database connection
+conn.close()
+
