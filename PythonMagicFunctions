@@ -1,0 +1,32 @@
+# Python program to overload equality
+#and less than operators
+
+class Calculate:
+	
+    def __init__(self, a):
+        self.a = a
+
+    #Less than
+    def __lt__(self, other):
+        if (self.a < other.a):
+            return "object1 is less than object2"
+        else:
+            return "object2 is less than object1"
+            
+    #Equals to         
+    def __eq__(self, other):
+        if (self.a == other.a):
+            return "Both are equal"
+        else:
+            return "Not equal"
+            
+            
+#creating instances            
+object1 = Calculate(2)
+object2 = Calculate(3)
+print("2 < 3",object1 < object2)
+
+object3 = Calculate(4)
+object4 = Calculate(4)
+print("4 == 4",object3 == object4)
+
